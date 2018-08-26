@@ -28,64 +28,81 @@ public class DAOProduto {
             pst.setFloat(4, produto.getValorVenda());
             pst.setInt(5, produto.getQtd());
             pst.setInt(6, produto.getId());
-            
+
             pst.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public static void remove(String nomeProd){
-        
+
+    public static void remove(String nomeProd) {
+
         String querySql = "DELETE FROM PRODUTO WHERE (NOME=?)";
-        
-        try(Connection connection = ConnectionUtils.obterConexao();
-                PreparedStatement stmt = connection.prepareStatement(querySql);
-                ){
-            
-            stmt.setString(1, nomeProd); 
+
+        try (Connection connection = ConnectionUtils.obterConexao();
+                PreparedStatement stmt = connection.prepareStatement(querySql);) {
+
+            stmt.setString(1, nomeProd);
             stmt.executeUpdate();
-            while (stmt != null && !stmt.isClosed()) {                
-                stmt.close();                
+            while (stmt != null && !stmt.isClosed()) {
+                stmt.close();
             }
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }                
-        
-    }
-        public static void select(String nomeProd,String tipoProd){
-            String querySql;
-            if (nomeProd == null){
-                querySql = "SELECT ID, NOME, DESCRICAO,PRECO_COMPRA,PRECO_VENDA,QUANTIDADE,DT_CADASTRO FROM PRODUTO";
-            }else{
-                querySql = "SELECT * FROM PRODUTO WHERE NOME LIKE '(NOME=?%)'";
-            }    
-            try(Connection conn = ConnectionUtils.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(querySql);
-                ResultSet resultados = stmt.executeQuery()){
-            
-            while(resultados.next()){
-                
-                long id = resultados.getLong("ID");
-                String prodNome = resultados.getString("NOME");
-                String descProd = resultados.getString("DESCRICAO");
-                float preCompra = resultados.getFloat("PRECO_COMPRA");
-                float preVenda = resultados.getFloat("PRECO_VENDA");
-                int Qtd = resultados.getInt("QUANTIDADE");
-                Date dtCadastro = resultados.getDate("DT_CADASTRO");
-                
-                System.out.println(id + "|" + prodNome + "|" + descProd + "|" + preCompra + "|"
-                + preVenda + "|" + Qtd + "|" + dtCadastro);
-            }
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-    }   
+
+    }
+
+    public static void select(String nomeProd, String tipoProd) {
+        String querySql;
+        String join = " INNER JOIN PRODUTOBD.PRODUTO_CATEGORIA AS PROCAT ON PRO.ID = PROCAT.ID_PRODUTO ";
+        String join2 = " INNER JOIN PRODUTOBD.CATEGORIA AS CAT ON CAT.ID = PROCAT.ID_CATEGORIA ";
+
+//       if (tipoProd == null && nomeProd == null){
+//            querySql = "SELECT PRO.*, CAT.* FROM PRODUTOBD.PRODUTO AS PRO " + join + join2;             
+        if (tipoProd == null) {
+            tipoProd = "";
+        } else if (nomeProd == null) {
+            nomeProd = "";
+        }
+        querySql = "SELECT PRO.*, CAT.* FROM PRODUTOBD.PRODUTO AS PRO " + join + join2
+                + "WHERE CAT.NOME LIKE '%" + tipoProd + "%' " + " AND PRO.NOME LIKE '%" + nomeProd + "'";
+
+        System.out.println("***Produtos***");
+        try (Connection conn = ConnectionUtils.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(querySql);
+                ResultSet resultados = stmt.executeQuery()) {
+
+            while (resultados.next()) {
+
+                long id = resultados.getLong("ID");
+                String prodNome = resultados.getString("PRO.NOME");
+                String procate = resultados.getString("CAT.NOME");
+                String descProd = resultados.getString("DESCRICAO");
+                float preCompra = resultados.getFloat("PRECO_COMPRA");
+                float preVenda = resultados.getFloat("PRECO_VENDA");
+                int Qtd = resultados.getInt("QUANTIDADE");
+                Date dtCadastro = resultados.getDate("DT_CADASTRO");
+
+                System.out.println("Código: " + id);
+                System.out.println("Nome: " + prodNome);
+                System.out.println("Categoria: " + procate);
+                System.out.println("Desc: " + descProd);
+                System.out.println("Preço de Compra: " + preCompra);
+                System.out.println("Preço de Venda: " + preVenda);
+                System.out.println("Qtd: " + Qtd);
+                System.out.println("Data de Cadastro: " + dtCadastro);
+                System.out.println("----------------------------------");
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
