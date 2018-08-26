@@ -5,6 +5,38 @@
     <artifactId>crudProduto</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <organization>
+        <name>Grupo PWDA - Senac TADS PI3-A</name>
+    </organization>
+    
+    <developers>
+        <developer>
+            <id>GitHub: WesleyMSantos</id>
+            <name>Wesley Moura dos Santos</name>
+        </developer>
+        
+        <developer>
+            <id>GitHub: </id>
+            <name> </name>
+        </developer>
+        
+        <developer>
+            <id>GitHub:</id>
+            <name> </name>
+        </developer>
+        
+        <developer>
+            <id>GitHub: </id>
+            <name> </name>
+        </developer>
+        
+        <developer>
+            <id>GitHub: </id>
+            <name> </name>
+        </developer>  
+    </developers>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

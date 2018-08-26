@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.senac.pi3.pdwa.crudproduto.servico;
 
 import br.senac.pi3.pdwa.crudproduto.bd.DAOProduto;
@@ -21,7 +17,21 @@ public class ServicoProduto {
             DAOProduto.update(produto);
         }catch(Exception e){
             e.printStackTrace();
-        }
+        }        
+    }
+    
+    public static String remove(String nomeProd){
         
+        String retorno = null;
+        
+        try {
+            
+            DAOProduto.remove(nomeProd);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            retorno = "Serviço temporariamente indisponível, contate o Administrador do Sistema!";
+        }
+        return retorno;
     }
 }

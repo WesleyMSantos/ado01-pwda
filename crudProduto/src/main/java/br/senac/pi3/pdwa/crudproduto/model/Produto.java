@@ -1,10 +1,6 @@
 
 package br.senac.pi3.pdwa.crudproduto.model;
 
-/**
- *
- * @author ezau
- */
 public class Produto {
     private String nome; 
     private String desc;

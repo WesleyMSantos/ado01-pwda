@@ -4,6 +4,8 @@ import br.senac.pi3.pdwa.crudproduto.model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*Métodos de CRUD do banco de dados*/
 public class DAOProduto {
@@ -29,5 +31,27 @@ public class DAOProduto {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void remove(String nomeProd){
+        
+        String querySql = "DELETE FROM PRODUTO WHERE (NOME=?)";
+        
+        try(Connection connection = ConnectionUtils.obterConexao();
+                PreparedStatement stmt = connection.prepareStatement(querySql);
+                ){
+            
+            stmt.setString(1, nomeProd); 
+            stmt.executeUpdate();
+            while (stmt != null && !stmt.isClosed()) {                
+                stmt.close();                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }                
+        
     }
 }
