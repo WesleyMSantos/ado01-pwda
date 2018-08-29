@@ -11,6 +11,31 @@ import java.util.logging.Logger;
 
 /*Métodos de CRUD do banco de dados*/
 public class DAOProduto {
+    
+        public static void insert(Produto produto) throws SQLException {
+        try {
+        Connection connection = ConnectionUtils.obterConexao();
+        String query = "INSERT INTO PRODUTO  (nome, desc, qtd, id, valorCompra, valorVenda) VALUES(?,?,?,?,?,?)";
+        
+        produto = new Produto();
+        
+        PreparedStatement stmt = connection.prepareStatement(query);
+        
+        stmt.setString(1, produto.getNome());
+        stmt.setString(2, produto.getDesc());
+        stmt.setInt(3, produto.getQtd());
+        stmt.setInt(4, produto.getId());
+        stmt.setFloat(5, produto.getValorCompra());
+        stmt.setFloat(6, produto.getValorVenda());
+        stmt.executeUpdate();
+        
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            System.out.println("Erro");
+        }
+    }
+            
 
     /*SQL pra atualizar o produto*/
     public static void update(Produto produto)
@@ -28,7 +53,7 @@ public class DAOProduto {
             pst.setFloat(4, produto.getValorVenda());
             pst.setInt(5, produto.getQtd());
             pst.setInt(6, produto.getId());
-
+            
             pst.execute();
         } catch (Exception e) {
             e.printStackTrace();
