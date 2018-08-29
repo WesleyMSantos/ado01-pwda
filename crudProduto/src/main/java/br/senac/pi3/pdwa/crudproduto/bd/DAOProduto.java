@@ -13,27 +13,24 @@ import java.util.logging.Logger;
 public class DAOProduto {
     
         public static void insert(Produto produto) throws SQLException {
-        try {
-        Connection connection = ConnectionUtils.obterConexao();
+            
         String query = "INSERT INTO PRODUTO  (nome, desc, qtd, id, valorCompra, valorVenda) VALUES(?,?,?,?,?,?)";
         
-        produto = new Produto();
+            try(Connection connection = ConnectionUtils.obterConexao();
+                 PreparedStatement stmt = connection.prepareStatement(query);    ) {
+                produto = new Produto();
+                stmt.setString(1, produto.getNome());
+                stmt.setString(2, produto.getDesc());
+                stmt.setInt(3, produto.getQtd());
+                stmt.setInt(4, produto.getId());
+                stmt.setFloat(5, produto.getValorCompra());
+                stmt.setFloat(6, produto.getValorVenda());
+                stmt.executeUpdate();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
-        PreparedStatement stmt = connection.prepareStatement(query);
         
-        stmt.setString(1, produto.getNome());
-        stmt.setString(2, produto.getDesc());
-        stmt.setInt(3, produto.getQtd());
-        stmt.setInt(4, produto.getId());
-        stmt.setFloat(5, produto.getValorCompra());
-        stmt.setFloat(6, produto.getValorVenda());
-        stmt.executeUpdate();
-        
-        }catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            System.out.println("Erro");
-        }
     }
             
 

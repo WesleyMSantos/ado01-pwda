@@ -37,8 +37,10 @@ public class Main {
             int opc3 = leitor.nextInt();
 
             if (opc3 == 2) {
-                System.out.println("Digite o nome do produto:");
+                System.out.print("Digite o nome do produto: ");
                 prod = leitor.next();
+                System.out.print("Digite a descrição do produto: ");
+                
             }
 
         }
