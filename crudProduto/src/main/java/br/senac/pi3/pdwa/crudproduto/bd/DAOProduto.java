@@ -29,8 +29,6 @@ public class DAOProduto {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        
     }
             
 

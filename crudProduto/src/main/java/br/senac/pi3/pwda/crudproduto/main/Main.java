@@ -9,15 +9,21 @@ public class Main {
     public static void main(String[] args) {
         String tipoProd = null;
         String prod = null;
+        int opc;
+        
         ServicoProduto produto = new ServicoProduto();
         Scanner leitor = new Scanner(System.in);
-
+        
+       
+        do{
+        
         System.out.println("***Bem Vindo***");
         System.out.println("[1] Buscar Produto");
         System.out.println("[2] Deletar Produto");
         System.out.println("[3] Inserir Produto");
         System.out.println("[4] Atualizar Produto");
-        int opc = leitor.nextInt();
+        System.out.println("[0] Sair");
+        opc = leitor.nextInt();
         
         switch(opc){
             case 1:
@@ -45,6 +51,18 @@ public class Main {
                         }
                     }
                     produto.select(prod, tipoProd);
+                break; 
+            case 2:
+                String nomeProd, retorno;
+                System.out.println("Digite o nome do Produto para ser Deletado: ");
+                nomeProd = leitor.next();
+                retorno = ServicoProduto.remove(nomeProd);
+                if(retorno == null){
+                    System.out.println("Produto excluído com sucesso!");
+                }  
+                
+                break;
+                
             case 3:
                     System.out.println("Digite o nome do produto: ");
                     String nome = leitor.nextLine();
@@ -57,7 +75,15 @@ public class Main {
                     System.out.println("Digite o valor unitário do produto: ");
                     float valorVenda = leitor.nextFloat();
                     
-                    Produto prod1 = new Produto();
+                    Produto prod1 = new Produto(); 
+                    break;
+                    
+            case 4:
+                    
+                
         }
+        
+        }while(opc != 0);
+       
     }       
 }
