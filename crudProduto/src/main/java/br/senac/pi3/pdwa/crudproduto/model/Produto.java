@@ -3,15 +3,24 @@ package br.senac.pi3.pdwa.crudproduto.model;
 
 public class Produto {
     private String nome; 
-    private String desc;
-    private int qtd;
+    private String descricao;
+    private int quantidade;
     private int id;
     private float valorCompra;
     private float valorVenda;
-
+   
+    /*
+    public Produto(String nome, String descricao, int quantidade, float valorCompra, float valorVenda ){
+        this.nome = nome;
+        this.descricao = descricao;
+        this.quantidade = quantidade;
+        this.valorCompra = valorCompra;
+        this.valorVenda = valorVenda;
+    }
     /**
      * @return the nome
      */
+    
     public String getNome() {
         return nome;
     }
@@ -27,28 +36,28 @@ public class Produto {
      * @return the desc
      */
     public String getDesc() {
-        return desc;
+        return descricao;
     }
 
     /**
      * @param desc the desc to set
      */
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String descricao) {
+        this.descricao = descricao;
     }
 
     /**
      * @return the qtd
      */
     public int getQtd() {
-        return qtd;
+        return quantidade;
     }
 
     /**
      * @param qtd the qtd to set
      */
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
+    public void setQtd(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     /**
