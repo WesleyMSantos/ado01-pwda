@@ -90,6 +90,33 @@ public class Main {
                     break;
 
                 case 4:
+                    System.out.println("Digite a ID do produto a ser atualizado");
+                    int id = leitor.nextInt();
+                    System.out.println("Digite o nome do produto: ");
+                    String novoNome = leitor.next();
+                    System.out.println("Digite a descrição do produto: ");
+                    String novaDescricao = leitor.next();
+                    System.out.println("Digite a quantidade de produtos: ");
+                    int novaQuantidade = leitor.nextInt();
+                    System.out.println("Digite o valor da compra: ");
+                    float novoValorCompra = leitor.nextFloat();
+                    System.out.println("Digite o valor unitário do produto: ");
+                    float novoValorVenda = leitor.nextFloat();
+
+                    Produto p = new Produto();
+
+                    p.setId(id);
+                    p.setNome(novoNome);
+                    p.setDescricao(novaDescricao);
+                    p.setQuantidade(novaQuantidade);
+                    p.setValorCompra(novoValorCompra);
+                    p.setValorVenda(novoValorVenda);
+
+                    try {
+                        produto.update(p);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
 
             }
 

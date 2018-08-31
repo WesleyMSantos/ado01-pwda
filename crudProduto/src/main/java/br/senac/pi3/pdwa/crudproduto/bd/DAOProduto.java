@@ -38,7 +38,7 @@ public class DAOProduto {
         try {
             Connection connection = ConnectionUtils.obterConexao();
             produto = new Produto();
-            String sql = "UPDATE Produto SET nome?, Descricao=?, preco_compra=?, preco_venda=?, Quantidade=? WHERE id=?";
+            String sql = "UPDATE Produto SET NOME=?, DESCRICAO=?, PRECO_COMPRA=?, PRECO_VENDA=?, QUANTIDADE=? WHERE ID=?";
 
             PreparedStatement pst = connection.prepareStatement(sql);
 
