@@ -11,26 +11,26 @@ import java.util.logging.Logger;
 
 /*Métodos de CRUD do banco de dados*/
 public class DAOProduto {
-    
-        public static void insert(Produto produto) throws SQLException {
-            
+
+    public static void insert(Produto produto) throws SQLException {
+
         String query = "INSERT INTO PRODUTO  (nome, desc, qtd, id, valorCompra, valorVenda) VALUES(?,?,?,?,?,?)";
-        
-            try(Connection connection = ConnectionUtils.obterConexao();
-                 PreparedStatement stmt = connection.prepareStatement(query);    ) {
-                produto = new Produto();
-                stmt.setString(1, produto.getNome());
-                stmt.setString(2, produto.getDesc());
-                stmt.setInt(3, produto.getQtd());
-                stmt.setInt(4, produto.getId());
-                stmt.setFloat(5, produto.getValorCompra());
-                stmt.setFloat(6, produto.getValorVenda());
-                stmt.executeUpdate();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+        try (Connection connection = ConnectionUtils.obterConexao();
+                PreparedStatement stmt = connection.prepareStatement(query);) {
+            produto = new Produto();
+            stmt.setString(1, produto.getNome());
+            stmt.setString(2, produto.getDescricao());
+            stmt.setInt(3, produto.getQuantidade());
+            stmt.setInt(4, produto.getId());
+            stmt.setFloat(5, produto.getValorCompra());
+            stmt.setFloat(6, produto.getValorVenda());
+            stmt.executeUpdate();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DAOProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-            
+
 
     /*SQL pra atualizar o produto*/
     public static void update(Produto produto)
@@ -43,12 +43,12 @@ public class DAOProduto {
             PreparedStatement pst = connection.prepareStatement(sql);
 
             pst.setString(1, produto.getNome());
-            pst.setString(2, produto.getDesc());
+            pst.setString(2, produto.getDescricao());
             pst.setFloat(3, produto.getValorCompra());
             pst.setFloat(4, produto.getValorVenda());
-            pst.setInt(5, produto.getQtd());
+            pst.setInt(5, produto.getQuantidade());
             pst.setInt(6, produto.getId());
-            
+
             pst.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class DAOProduto {
         String join2 = " INNER JOIN PRODUTOBD.CATEGORIA AS CAT ON CAT.ID = PROCAT.ID_CATEGORIA ";
 
 //       if (tipoProd == null && nomeProd == null){
-//            querySql = "SELECT PRO.*, CAT.* FROM PRODUTOBD.PRODUTO AS PRO " + join + join2;             
+//            querySql = "SELECT PRO.*, CAT.* FROM PRODUTOBD.PRODUTO AS PRO " + join + join2;
         if (tipoProd == null) {
             tipoProd = "";
         } else if (nomeProd == null) {
