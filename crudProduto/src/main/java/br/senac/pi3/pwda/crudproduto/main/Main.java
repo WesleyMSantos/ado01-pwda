@@ -28,29 +28,29 @@ public class Main {
 
             switch (opc) {
                 case 1:
-                    if (opc == 1) {
-                        System.out.println("Deseja pesquisar por categoria de produto:");
-                        System.out.println("[1] Sim");
-                        System.out.println("[2] Não");
-                        int opc2 = leitor.nextInt();
 
-                        if (opc2 == 1) {
-                            System.out.println("Digite a categoria do produto:");
-                            tipoProd = leitor.next();
-                        } else {
-                            tipoProd = "";
-                        }
+                    System.out.println("Deseja pesquisar por categoria de produto:");
+                    System.out.println("[1] Sim");
+                    System.out.println("[2] Não");
+                    int opc2 = leitor.nextInt();
 
-                        System.out.println("Deseja visualizar todos o produtos:");
-                        System.out.println("[1] Sim");
-                        System.out.println("[2] Não");
-                        int opc3 = leitor.nextInt();
-
-                        if (opc3 == 2) {
-                            System.out.print("Digite o nome do produto: ");
-                            prod = leitor.next();
-                        }
+                    if (opc2 == 1) {
+                        System.out.println("Digite a categoria do produto:");
+                        tipoProd = leitor.next();
+                    } else {
+                        tipoProd = "";
                     }
+
+                    System.out.println("Deseja visualizar todos o produtos:");
+                    System.out.println("[1] Sim");
+                    System.out.println("[2] Não");
+                    int opc3 = leitor.nextInt();
+
+                    if (opc3 == 2) {
+                        System.out.print("Digite o nome do produto: ");
+                        prod = leitor.next();
+                    }
+
                     produto.select(prod, tipoProd);
                     break;
                 case 2:

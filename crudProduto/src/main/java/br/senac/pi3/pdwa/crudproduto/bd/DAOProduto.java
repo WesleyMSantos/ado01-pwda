@@ -14,7 +14,7 @@ public class DAOProduto {
 
     public static void insert(Produto produto) throws SQLException {
 
-        String query = "INSERT INTO PRODUTO  (nome, desc, qtd, id, valorCompra, valorVenda) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO PRODUTO (nome, descricao, quantidade, id, valorCompra, valorVenda) VALUES(?,?,?,?,?,?)";
 
         try (Connection connection = ConnectionUtils.obterConexao();
                 PreparedStatement stmt = connection.prepareStatement(query);) {
